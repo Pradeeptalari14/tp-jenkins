@@ -1,0 +1,77 @@
+# ──────────────────────────────────────────────────────────
+# .gitignore for Jenkins CI/CD Pipeline
+# Prevent secrets, credentials, and build artifacts from being committed
+# ──────────────────────────────────────────────────────────
+
+# === SECRETS & CREDENTIALS (CRITICAL — never commit these) ===
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+secrets.yaml
+secrets.yml
+*-secret.yaml
+*-secret.yml
+kubeconfig
+*.kubeconfig
+terraform.tfvars
+terraform.tfvars.json
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+vault-token
+.vault-token
+id_rsa
+id_ed25519
+*.ppk
+
+# === CLOUD CREDENTIALS ===
+.aws/credentials
+.azure/
+.gcloud/
+service-account.json
+*-service-account.json
+gcp-credentials.json
+
+# === BUILD ARTIFACTS ===
+node_modules/
+dist/
+build/
+target/
+*.jar
+*.war
+*.class
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+env/
+
+# === IDE & EDITOR ===
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# === LOGS & TEMP ===
+*.log
+logs/
+tmp/
+temp/
+.cache/
+.trivycache/
+trivy-report.*
+
+# === TESTING ===
+coverage/
+.nyc_output/
+junit-report.xml

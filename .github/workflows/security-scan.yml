@@ -1,0 +1,60 @@
+name: Security Scan — Jenkins CI/CD Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '0 3 * * 1'  # Every Monday at 03:00 UTC
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  secret-scan:
+    name: 🔍 Gitleaks — Secret Detection
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with: { fetch-depth: 0 }
+    - uses: gitleaks/gitleaks-action@v2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  iac-scan:
+    name: 🛡️ Trivy — IaC Config Scan
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: aquasecurity/trivy-action@master
+      with:
+        scan-type: config
+        scan-ref: .
+        severity: HIGH,CRITICAL
+        exit-code: '1'
+        ignore-unfixed: true
+
+  yaml-lint:
+    name: 📋 YAML Lint
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: ibiqlik/action-yamllint@v3
+      with:
+        config_data: |
+          extends: default
+          rules:
+            line-length: { max: 160 }
+            truthy: disable
+
+  shell-check:
+    name: 🐚 ShellCheck — Script Analysis
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: ludeeus/action-shellcheck@master
+      with:
+        scandir: './scripts'
+        severity: warning
