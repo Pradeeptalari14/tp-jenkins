@@ -1,3 +1,4 @@
+---
 # .pre-commit-config.yaml
 # Run: pip install pre-commit && pre-commit install
 # Then: pre-commit run --all-files
@@ -6,30 +7,30 @@ repos:
   - repo: https://github.com/gitleaks/gitleaks
     rev: v8.18.2
     hooks:
-    - id: gitleaks
-      name: 🔍 Detect secrets
+      - id: gitleaks
+        name: 🔍 Detect secrets
 
   - repo: https://github.com/adrienverge/yamllint
     rev: v1.35.1
     hooks:
-    - id: yamllint
-      args: [-c, .yamllint.yml]
-      name: 📋 YAML lint
+      - id: yamllint
+        args: [-c, .yamllint.yml]
+        name: 📋 YAML lint
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.6.0
     hooks:
-    - id: trailing-whitespace
-    - id: end-of-file-fixer
-    - id: check-yaml
-    - id: check-added-large-files
-      args: ['--maxkb=500']
-    - id: detect-private-key
-      name: 🔒 Detect private keys
-    - id: check-merge-conflict
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+        args: ['--maxkb=500']
+      - id: detect-private-key
+        name: 🔒 Detect private keys
+      - id: check-merge-conflict
 
   - repo: https://github.com/shellcheck-py/shellcheck-py
     rev: v0.10.0.1
     hooks:
-    - id: shellcheck
-      name: 🐚 Shell script analysis
+      - id: shellcheck
+        name: 🐚 Shell script analysis
