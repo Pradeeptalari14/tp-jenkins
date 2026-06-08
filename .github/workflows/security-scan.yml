@@ -67,7 +67,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: koalaman/shellcheck-action@v2
+      - uses: ludeeus/action-shellcheck@master
         with:
-          path: './scripts'
+          scandir: './scripts'
           severity: warning
+          version: 'v0.9.0'
