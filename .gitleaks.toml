@@ -1,4 +1,4 @@
-[allowlist]
+[[allowlists]]
   paths = [
     '''README\.md''',
     '''SECURITY\.md''',
